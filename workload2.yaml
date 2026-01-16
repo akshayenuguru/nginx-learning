@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apache-workload
+  labels:
+    tier: frontend
+spec:
+  replicas: 4                       
+  selector:
+    matchLabels:
+      app: apache-server
+  template:
+    metadata:
+      labels:
+        app: apache-server
+    spec:
+      containers:
+      - name: httpd
+        image: httpd:2.4            
+        ports:
+        - containerPort: 80
